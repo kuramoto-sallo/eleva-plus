@@ -7,7 +7,7 @@ Achados de segurança e UX vêm da revisão do MVP feita no mesmo dia.
 Legenda da última coluna: **manter** = igual ao MVP; **mudar** = corrigir no site novo; **a definir** = depende do RH,
 do jurídico ou da pessoa responsável.
 
-> Nome: o MVP usa **ELEVE+**; o repositório e o plano usam **Eleva+**. Confirmar a grafia oficial antes da Fase 3.
+> Nome oficial: **ELEVE+** (confirmado em 26/11/2026). O repositório continua `eleva-plus`.
 
 ## Rotas
 

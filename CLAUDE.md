@@ -1,10 +1,12 @@
 @AGENTS.md
 
-# Eleva+ — site de inscrição do Programa de Estágio do Grupo Sallo
+# ELEVE+ — site de inscrição do Programa de Estágio do Grupo Sallo
 
 Site público onde candidatos se inscrevem (formulário, vídeo de até 1 minuto e currículo) e área restrita onde o RH
 avalia, exporta e exclui inscrições. Construído do zero; o MVP do Lovable é só referência visual e de funcionalidade
 (ver `docs/referencia/inventario-mvp.md`). Nenhum código do MVP é reaproveitado.
+
+Nome oficial do programa: **ELEVE+** (sempre em caixa alta, com o sinal de mais). O repositório se chama `eleva-plus`.
 
 Idioma: interface, textos, mensagens de commit, PRs e documentação em **português do Brasil**. Nomes de código
 (variáveis, funções, tabelas) em inglês.
