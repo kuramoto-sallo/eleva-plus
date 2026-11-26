@@ -1,0 +1,11 @@
+.next
+node_modules
+package-lock.json
+coverage
+playwright-report
+test-results
+supabase/.temp
+.agents
+.claude
+supabase/config.jsonc
+skills-lock.json
