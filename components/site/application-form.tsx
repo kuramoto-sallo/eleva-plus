@@ -19,10 +19,16 @@ import {
   type ApplicationInput,
 } from "@/lib/validation/application";
 import { Choice, ChoiceGroup, Field, fieldBase } from "./form-fields";
+import { Turnstile, type TurnstileHandle } from "./turnstile";
+import { submitApplication } from "@/lib/applications/submit-client";
 
-export type SubmitFiles = { resume: File; video: File | null };
-export type SubmitResult = { ok: true } | { ok: false; message: string };
-export type SubmitApplication = (data: Application, files: SubmitFiles) => Promise<SubmitResult>;
+const STAGE_LABELS = {
+  preparando: "Preparando o envio…",
+  curriculo: "Enviando o currículo…",
+  video: "Enviando o vídeo… (pode levar alguns minutos)",
+  finalizando: "Finalizando a inscrição…",
+} as const;
+type Stage = keyof typeof STAGE_LABELS;
 
 type StepField = FieldPath<ApplicationInput> | "resume" | "videoFile";
 
@@ -74,7 +80,7 @@ function readVideoDuration(file: File): Promise<number | undefined> {
   });
 }
 
-export function ApplicationForm({ submit }: { submit?: SubmitApplication }) {
+export function ApplicationForm({ turnstileSiteKey }: { turnstileSiteKey: string }) {
   const [step, setStep] = React.useState(0);
   const [resume, setResume] = React.useState<File | null>(null);
   const [video, setVideo] = React.useState<{ file: File; duration?: number } | null>(null);
@@ -82,6 +88,9 @@ export function ApplicationForm({ submit }: { submit?: SubmitApplication }) {
   const [summary, setSummary] = React.useState<{ field: StepField; message: string }[]>([]);
   const [status, setStatus] = React.useState<"idle" | "sending" | "sent" | "error">("idle");
   const [serverMessage, setServerMessage] = React.useState<string>();
+  const [stage, setStage] = React.useState<Stage | null>(null);
+  const [turnstileToken, setTurnstileToken] = React.useState<string | null>(null);
+  const turnstileRef = React.useRef<TurnstileHandle>(null);
   const summaryRef = React.useRef<HTMLDivElement>(null);
   const stepHeadingRef = React.useRef<HTMLHeadingElement>(null);
   const firstRender = React.useRef(true);
@@ -156,25 +165,37 @@ export function ApplicationForm({ submit }: { submit?: SubmitApplication }) {
     if (problems.length === 0) setStep((s) => s + 1);
   }
 
-  async function onSubmit(data: Application) {
+  // Chamado só depois que o schema aprovou tudo. O servidor recebe os valores brutos do
+  // formulário e valida de novo com o mesmo schema.
+  async function onSubmit() {
     if (!resume) return;
-    if (!submit) {
+    if (!turnstileToken) {
       setStatus("error");
-      setServerMessage("O envio das inscrições abre em 30/11/2026. Seus dados não foram enviados.");
+      setServerMessage("Aguarde a verificação de segurança logo acima do botão e tente de novo.");
       return;
     }
     setStatus("sending");
     setServerMessage(undefined);
     try {
-      const result = await submit(data, { resume, video: data.videoMode === "upload" ? (video?.file ?? null) : null });
+      const values = form.getValues();
+      const result = await submitApplication(
+        values,
+        { resume, video: values.videoMode === "upload" ? (video?.file ?? null) : null },
+        turnstileToken,
+        setStage,
+      );
       if (result.ok) setStatus("sent");
       else {
         setStatus("error");
         setServerMessage(result.message);
+        turnstileRef.current?.reset();
       }
     } catch {
       setStatus("error");
       setServerMessage("Não foi possível enviar agora. Verifique sua conexão e tente de novo.");
+      turnstileRef.current?.reset();
+    } finally {
+      setStage(null);
     }
   }
 
@@ -574,6 +595,14 @@ export function ApplicationForm({ submit }: { submit?: SubmitApplication }) {
                 </p>
               )}
             </div>
+
+            <Turnstile ref={turnstileRef} siteKey={turnstileSiteKey} onToken={setTurnstileToken} />
+
+            {status === "sending" && stage && (
+              <p role="status" className="text-muted-foreground text-sm">
+                {STAGE_LABELS[stage]}
+              </p>
+            )}
 
             {status === "error" && serverMessage && (
               <p role="alert" className="border-destructive bg-destructive/5 rounded-md border p-4 text-sm">
