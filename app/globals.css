@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design tokens tirados do MVP de referência (docs/referencia/inventario-mvp.md).
+ * Azul-marinho (navy) como primária, laranja como cor de marca/destaque,
+ * fundo "ink" escuro nas seções de destaque.
+ */
+:root {
+  --navy: oklch(24% 0.065 275);
+  --orange: oklch(62% 0.16 45);
+
+  --background: oklch(98.5% 0.004 270);
+  --foreground: oklch(20% 0.05 275);
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(20% 0.05 275);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(20% 0.05 275);
+  --primary: var(--navy);
+  --primary-foreground: oklch(99% 0 0);
+  --secondary: oklch(95% 0.01 275);
+  --secondary-foreground: oklch(24% 0.065 275);
+  --muted: oklch(95.5% 0.008 275);
+  --muted-foreground: oklch(48% 0.03 275);
+  --accent: oklch(95% 0.03 50);
+  --accent-foreground: oklch(24% 0.065 275);
+  --destructive: oklch(57.7% 0.245 27.325);
+  --destructive-foreground: oklch(99% 0 0);
+  --border: oklch(90% 0.012 275);
+  --input: oklch(88% 0.015 275);
+  --ring: var(--orange);
+  --radius: 0.75rem;
+
+  --brand: var(--orange);
+  --brand-foreground: oklch(99% 0 0);
+
+  --ink: oklch(17% 0.05 275);
+  --ink-card: oklch(22% 0.06 275);
+  --ink-foreground: oklch(97% 0.005 275);
+  --ink-muted: oklch(72% 0.03 275);
+  --ink-border: oklch(100% 0 0 / 0.12);
+
+  --gradient-ink: radial-gradient(120% 90% at 85% 10%, oklch(32% 0.09 275) 0%, oklch(17% 0.05 275) 55%);
+  --shadow-card: 0 1px 2px oklch(20% 0.05 275 / 0.06), 0 12px 32px -12px oklch(20% 0.05 275 / 0.18);
+  --shadow-glow: 0 18px 40px -14px oklch(62% 0.16 45 / 0.55);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-navy: var(--navy);
+  --color-orange: var(--orange);
+  --color-ink: var(--ink);
+  --color-ink-card: var(--ink-card);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-border: var(--ink-border);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-glow: var(--shadow-glow);
+
+  --font-sans: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-michroma), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
