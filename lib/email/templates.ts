@@ -23,3 +23,78 @@ export function confirmationEmail(firstName: string) {
   ]);
   return { subject: "ELEVE+ | Inscrição recebida", html, text };
 }
+
+// E-mail a cada mudança de fase (decisão de 26/11/2026). Rascunho: o RH aprova os textos.
+// "desistiu" não gera e-mail (foi o candidato quem avisou).
+const PHASE_MESSAGES = {
+  testes_online: {
+    subject: "ELEVE+ | Você avançou para os testes online",
+    title: "Você avançou para os testes online!",
+    body: [
+      "Sua inscrição passou pela triagem e você segue para a próxima fase: os testes online.",
+      "Em breve você recebe as instruções de acesso e o prazo para fazer os testes.",
+    ],
+  },
+  sallo_experience: {
+    subject: "ELEVE+ | Você avançou para o Sallo Experience",
+    title: "Você avançou para o Sallo Experience!",
+    body: [
+      "Parabéns pelo resultado nos testes online. Você foi convidado(a) para o Sallo Experience.",
+      "Vamos enviar data, horário e local por e-mail. Se tiver alguma dúvida, fale com o RH.",
+    ],
+  },
+  painel: {
+    subject: "ELEVE+ | Você avançou para o painel",
+    title: "Você avançou para o painel!",
+    body: [
+      "Você segue no processo e foi selecionado(a) para a fase de painel.",
+      "Em breve enviamos os detalhes de data e formato.",
+    ],
+  },
+  entrevista_final: {
+    subject: "ELEVE+ | Você avançou para a entrevista final",
+    title: "Você avançou para a entrevista final!",
+    body: [
+      "Você chegou à última fase do processo: a entrevista final.",
+      "Vamos entrar em contato para combinar data e horário.",
+    ],
+  },
+  aprovada: {
+    subject: "ELEVE+ | Você foi aprovado(a)!",
+    title: "Você foi aprovado(a) no ELEVE+!",
+    body: [
+      "Parabéns! Você foi aprovado(a) no Programa de Estágio do Grupo Sallo.",
+      "O RH vai entrar em contato com os próximos passos da admissão.",
+    ],
+  },
+  lista_de_espera: {
+    subject: "ELEVE+ | Atualização da sua inscrição",
+    title: "Você está na nossa lista de espera",
+    body: [
+      "Você fez um ótimo processo e está na lista de espera do ELEVE+.",
+      "Se surgir uma vaga, entramos em contato por e-mail ou telefone.",
+    ],
+  },
+  contratada: {
+    subject: "ELEVE+ | Boas-vindas ao Grupo Sallo",
+    title: "Boas-vindas ao Grupo Sallo!",
+    body: ["Sua admissão foi concluída. Estamos felizes em ter você no ELEVE+."],
+  },
+  nao_selecionada: {
+    subject: "ELEVE+ | Atualização da sua inscrição",
+    title: "Obrigado por participar do ELEVE+",
+    body: [
+      "Agradecemos seu interesse e o tempo dedicado ao processo seletivo.",
+      "Desta vez você não seguirá para a próxima fase. Esperamos ver você em uma próxima turma.",
+    ],
+  },
+} as const;
+
+export type PhaseWithEmail = keyof typeof PHASE_MESSAGES;
+
+export function phaseEmail(status: string, firstName: string) {
+  if (!(status in PHASE_MESSAGES)) return null;
+  const m = PHASE_MESSAGES[status as PhaseWithEmail];
+  const { html, text } = layout(m.title, [`Olá, ${firstName}!`, ...m.body]);
+  return { subject: m.subject, html, text };
+}

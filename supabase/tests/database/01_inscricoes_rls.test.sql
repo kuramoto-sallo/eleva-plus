@@ -1,7 +1,7 @@
 -- Regras de acesso das inscrições (CLAUDE.md, regras de segurança 1 a 3).
 -- Rode com: npx supabase test db
 begin;
-select plan(29);
+select plan(31);
 
 -- ---------------------------------------------------------------------------
 -- Dados fictícios (como postgres, que ignora a RLS)
@@ -126,7 +126,10 @@ select throws_ok(
 );
 update public.applications set status = 'testes_online'
   where id = '00000000-0000-0000-0000-00000000aa01';
-delete from public.applications where id = '00000000-0000-0000-0000-00000000aa01';
+select throws_ok(
+  $$ delete from public.applications where id = '00000000-0000-0000-0000-00000000aa01' $$,
+  '42501', null, 'conta sem papel não exclui'
+);
 
 -- ---------------------------------------------------------------------------
 -- RH
@@ -163,7 +166,10 @@ select throws_ok(
      where id = '00000000-0000-0000-0000-00000000aa01' $$,
   '42501', null, 'RH não edita os dados do candidato'
 );
-delete from public.applications where id = '00000000-0000-0000-0000-00000000aa01';
+select throws_ok(
+  $$ delete from public.applications where id = '00000000-0000-0000-0000-00000000aa01' $$,
+  '42501', null, 'RH não exclui pela API'
+);
 select is((select count(*)::int from public.applications), 1, 'RH não exclui inscrições');
 select throws_ok(
   $$ update public.staff_members set role = 'admin'
@@ -177,12 +183,14 @@ select throws_ok(
 set local request.jwt.claims to '{"sub":"00000000-0000-0000-0000-0000000000a1","role":"authenticated"}';
 
 select is((select count(*)::int from public.staff_members), 2, 'admin vê a equipe toda');
-select lives_ok(
+select throws_ok(
   $$ delete from public.applications where id = '00000000-0000-0000-0000-00000000aa01' $$,
-  'admin exclui inscrição'
+  '42501', null, 'admin também não exclui pela API: exclusão só pelo servidor'
 );
 
+-- O servidor exclui com a chave secreta (aqui simulado pelo dono das tabelas).
 reset role;
+delete from public.applications where id = '00000000-0000-0000-0000-00000000aa01';
 select is((select count(*)::int from public.applications), 0, 'inscrição foi excluída');
 select is(
   (select count(*)::int from public.application_status_history
