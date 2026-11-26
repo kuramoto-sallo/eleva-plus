@@ -154,6 +154,12 @@ export async function finishApplication(input: unknown): Promise<{ ok: true } | 
   if (!processId) return fail(CLOSED);
 
   const supabase = createAdminClient();
+
+  // Reenvio (clique duplo ou nova tentativa depois de uma falha de rede): se a inscrição
+  // já foi gravada, responde sucesso sem mexer nos arquivos dela.
+  const { data: existing } = await supabase.from("applications").select("id").eq("id", applicationId).maybeSingle();
+  if (existing) return { ok: true };
+
   const cvPath = resumePath(processId, applicationId);
   const vPath = a.videoMode === "upload" && videoMime ? videoPath(processId, applicationId, videoMime) : null;
   if (a.videoMode === "upload" && !vPath) return fail("Envie seu vídeo.");

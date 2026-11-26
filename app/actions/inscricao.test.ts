@@ -18,6 +18,7 @@ const state = {
   processId: "11111111-1111-4111-8111-111111111111" as string | null,
   fileHeads: {} as Record<string, string>,
   insertError: null as null | { code: string },
+  existing: false as boolean,
   inserted: [] as Record<string, unknown>[],
   removed: [] as string[][],
 };
@@ -26,6 +27,7 @@ function queryChain() {
   const chain = {
     select: () => chain,
     lte: () => chain,
+    eq: () => ({ maybeSingle: async () => ({ data: state.existing ? { id: "x" } : null, error: null }) }),
     gt: () => chain,
     order: () => chain,
     limit: () => chain,
@@ -99,6 +101,7 @@ beforeEach(() => {
     processId: "11111111-1111-4111-8111-111111111111",
     fileHeads: {},
     insertError: null,
+    existing: false,
     inserted: [],
     removed: [],
   });
@@ -196,6 +199,14 @@ describe("finishApplication", () => {
     expect(r.message).toContain("Já recebemos uma inscrição");
     expect(state.removed).toHaveLength(1);
     expect(sendEmail).not.toHaveBeenCalled();
+  });
+
+  it("reenvio de uma inscrição já gravada responde sucesso sem apagar os arquivos", async () => {
+    state.existing = true;
+    const r = await finishApplication({ applicationId: appId, data, videoMime: "video/mp4" });
+    expect(r).toEqual({ ok: true });
+    expect(state.removed).toHaveLength(0);
+    expect(state.inserted).toHaveLength(0);
   });
 
   it("recusa id que não é UUID", async () => {
