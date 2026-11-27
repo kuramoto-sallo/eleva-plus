@@ -73,7 +73,7 @@ export const VIDEO_MAX_SECONDS = 60;
 export const VIDEO_MIME_TYPES = ["video/mp4", "video/quicktime", "video/webm"] as const;
 
 /** Versão do texto de consentimento. Mude junto com o texto da Política de Privacidade. */
-export const CONSENT_VERSION = "2026-11-26";
+export const CONSENT_VERSION = "2026-11-27";
 
 const required = (message: string) => ({ error: message });
 
