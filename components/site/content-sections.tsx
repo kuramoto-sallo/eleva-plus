@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {
-  ArrowRight,
   BookOpen,
   Clock,
   Compass,
@@ -18,6 +17,7 @@ import {
 import { MACRO_AREAS } from "@/lib/validation/application";
 import { SITE_IMAGES } from "@/lib/site-assets";
 import { BenefitsCarousel } from "./benefits-carousel";
+import { CtaButton } from "./cta-button";
 import { DashedCurves } from "./dashed-curves";
 import { Section, SectionHeading } from "./section";
 
@@ -310,13 +310,7 @@ export function ProcessoSection() {
       </ol>
 
       <div className="mt-16 flex justify-center">
-        <a
-          href="#inscricao"
-          className="bg-primary text-primary-foreground inline-flex min-h-12 items-center gap-3 rounded-full px-8 py-4 text-sm font-bold tracking-wider uppercase transition-transform hover:-translate-y-0.5"
-        >
-          Inscreva-se agora
-          <ArrowRight aria-hidden="true" className="size-4" />
-        </a>
+        <CtaButton variant="navy">Inscreva-se agora</CtaButton>
       </div>
     </Section>
   );
