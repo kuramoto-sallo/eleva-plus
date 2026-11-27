@@ -9,23 +9,23 @@ resume o que o schema (`supabase/migrations/20261126200000_inscricoes.sql`) impl
 Todos obrigatórios, exceto LinkedIn. Base legal: procedimento preliminar a contrato (LGPD, art. 7º, V),
 aprovada pelo jurídico em 26/11/2026.
 
-| Etapa             | Campo                     | Coluna                                | Regra                                                                      |
-| ----------------- | ------------------------- | ------------------------------------- | -------------------------------------------------------------------------- |
-| 1. Dados pessoais | Nome completo             | `full_name`                           | 3 a 120 caracteres                                                         |
-|                   | E-mail                    | `email`                               | minúsculas, até 254; um por processo                                       |
-|                   | Telefone/WhatsApp com DDD | `phone`                               | só dígitos, DDD + 8 ou 9 dígitos (`lib/validation/phone.ts`)               |
-|                   | Cidade                    | `city`                                | 2 a 80 caracteres                                                          |
-|                   | Estado (UF)               | `state`                               | uma das 27 UFs                                                             |
-| 2. Formação       | Instituição de ensino     | `institution`                         | 2 a 120 caracteres                                                         |
-|                   | Curso                     | `course`                              | texto livre, 2 a 120 caracteres                                            |
-|                   | Semestre/período atual    | `semester`                            | 1 a 10                                                                     |
-|                   | Previsão de conclusão     | `graduation_month`, `graduation_year` | a partir de dez/2027                                                       |
-| 3. Interesses     | Área de interesse         | `interest_area`                       | uma macroárea: Operações, Produto, Mercado, Gestão                         |
-|                   | Disponibilidade           | `availability`                        | Manhã ou Tarde (turno fixo de 6 h)                                         |
-|                   | LinkedIn (opcional)       | `linkedin_url`                        | começa com `https://linkedin.com/` ou `https://www.linkedin.com/`          |
-|                   | Currículo                 | `resume_path`                         | PDF até 10 MB, bucket privado `candidate-files`                            |
-| 4. Vídeo e envio  | Vídeo de até 1 minuto     | `video_path` ou `video_url`           | upload MP4/MOV/WebM até 100 MB, ou link do YouTube; exatamente um dos dois |
-|                   | Aceite da política        | `consent_version`, `consent_at`       | versão do texto e momento do aceite                                        |
+| Etapa             | Campo                     | Coluna                                | Regra                                                                     |
+| ----------------- | ------------------------- | ------------------------------------- | ------------------------------------------------------------------------- |
+| 1. Dados pessoais | Nome completo             | `full_name`                           | 3 a 120 caracteres                                                        |
+|                   | E-mail                    | `email`                               | minúsculas, até 254; um por processo                                      |
+|                   | Telefone/WhatsApp com DDD | `phone`                               | só dígitos, DDD + 8 ou 9 dígitos (`lib/validation/phone.ts`)              |
+|                   | Cidade                    | `city`                                | 2 a 80 caracteres                                                         |
+|                   | Estado (UF)               | `state`                               | uma das 27 UFs                                                            |
+| 2. Formação       | Instituição de ensino     | `institution`                         | 2 a 120 caracteres                                                        |
+|                   | Curso                     | `course`                              | texto livre, 2 a 120 caracteres                                           |
+|                   | Semestre/período atual    | `semester`                            | 1 a 10                                                                    |
+|                   | Previsão de conclusão     | `graduation_month`, `graduation_year` | a partir de dez/2027                                                      |
+| 3. Interesses     | Área de interesse         | `interest_area`                       | uma macroárea: Operações, Produto, Mercado, Gestão                        |
+|                   | Disponibilidade           | `availability`                        | Manhã ou Tarde (turno fixo de 6 h)                                        |
+|                   | LinkedIn (opcional)       | `linkedin_url`                        | começa com `https://linkedin.com/` ou `https://www.linkedin.com/`         |
+|                   | Currículo                 | `resume_path`                         | PDF até 10 MB, bucket privado `candidate-files`                           |
+| 4. Vídeo e envio  | Vídeo de até 1 minuto     | `video_path` ou `video_url`           | upload MP4/MOV/WebM até 50 MB, ou link do YouTube; exatamente um dos dois |
+|                   | Aceite da política        | `consent_version`, `consent_at`       | versão do texto e momento do aceite                                       |
 
 Subáreas por macroárea (só texto de apoio no formulário): Operações (PPCP, Produção, Engenharia de
 Processos, Qualidade, Logística); Produto (Estilo, Modelagem, Desenvolvimento, Compras, Pilotagem); Mercado

@@ -80,7 +80,7 @@ export async function startApplication(input: unknown): Promise<StartResult> {
   if (application.videoMode === "upload") {
     if (!video) return fail("Envie seu vídeo.");
     videoMime = videoMimeFrom(video);
-    if (!videoMime || video.size > VIDEO_MAX_BYTES) return fail("O vídeo precisa ser MP4, MOV ou WebM de até 100 MB.");
+    if (!videoMime || video.size > VIDEO_MAX_BYTES) return fail("O vídeo precisa ser MP4, MOV ou WebM de até 50 MB.");
   }
 
   const h = await headers();
@@ -177,7 +177,7 @@ export async function finishApplication(input: unknown): Promise<{ ok: true } | 
     if (!v) return fail("Não encontramos o vídeo enviado. Tente de novo.");
     if (!isAllowedVideo(v.type) || v.size > VIDEO_MAX_BYTES) {
       await discard();
-      return fail("O vídeo precisa ser MP4, MOV ou WebM, com até 100 MB.");
+      return fail("O vídeo precisa ser MP4, MOV ou WebM, com até 50 MB.");
     }
   }
 
