@@ -68,7 +68,7 @@ export const GRADUATION_YEARS = [2027, 2028, 2029, 2030, 2031, 2032, 2033] as co
 
 export const RESUME_MAX_BYTES = 10 * 1024 * 1024;
 export const RESUME_MIME_TYPES = ["application/pdf"] as const;
-export const VIDEO_MAX_BYTES = 100 * 1024 * 1024;
+export const VIDEO_MAX_BYTES = 50 * 1024 * 1024; // limite do plano gratuito do Supabase (27/11/2026)
 export const VIDEO_MAX_SECONDS = 60;
 export const VIDEO_MIME_TYPES = ["video/mp4", "video/quicktime", "video/webm"] as const;
 
@@ -197,7 +197,7 @@ export function checkVideo(
   const ext = file.name.toLowerCase().split(".").pop() ?? "";
   const typeOk = (VIDEO_MIME_TYPES as readonly string[]).includes(file.type) || ["mp4", "mov", "webm"].includes(ext);
   if (!typeOk) return { ok: false, message: "O vídeo precisa ser MP4, MOV ou WebM." };
-  if (file.size > VIDEO_MAX_BYTES) return { ok: false, message: "O vídeo pode ter até 100 MB." };
+  if (file.size > VIDEO_MAX_BYTES) return { ok: false, message: "O vídeo pode ter até 50 MB." };
   if (file.size === 0) return { ok: false, message: "O arquivo do vídeo está vazio." };
   // Margem de 1 s para arredondamento do navegador.
   if (durationSeconds !== undefined && durationSeconds > VIDEO_MAX_SECONDS + 1) {

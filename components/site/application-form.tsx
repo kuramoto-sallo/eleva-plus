@@ -499,7 +499,7 @@ export function ApplicationForm({ turnstileSiteKey }: { turnstileSiteKey: string
                   {...register("videoMode")}
                   value="upload"
                   label="Enviar arquivo"
-                  description="MP4, MOV ou WebM, até 100 MB"
+                  description="MP4, MOV ou WebM, até 50 MB"
                 />
                 <Choice
                   {...register("videoMode")}
@@ -516,7 +516,7 @@ export function ApplicationForm({ turnstileSiteKey }: { turnstileSiteKey: string
                 label="Arquivo do vídeo"
                 required
                 error={err("videoFile")}
-                hint="Até 1 minuto e 100 MB."
+                hint="Até 1 minuto e 50 MB."
               >
                 {(a) => (
                   <input

@@ -103,7 +103,7 @@ describe("checkResume", () => {
 });
 
 describe("checkVideo", () => {
-  it("aceita MP4, MOV e WebM até 100 MB e 1 minuto", () => {
+  it("aceita MP4, MOV e WebM até 50 MB e 1 minuto", () => {
     expect(checkVideo({ name: "v.mp4", type: "video/mp4", size: 1000 }, 59).ok).toBe(true);
     expect(checkVideo({ name: "v.mov", type: "video/quicktime", size: 1000 }, 60.5).ok).toBe(true);
     expect(checkVideo({ name: "v.webm", type: "video/webm", size: 1000 }).ok).toBe(true);
