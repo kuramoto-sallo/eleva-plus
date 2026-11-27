@@ -15,8 +15,6 @@ export function HeaderScrollShell({ className, children }: { className?: string;
   }, []);
 
   return (
-    <header className={cn(className, scrolled && "xl:bg-ink/90 xl:py-3 xl:shadow-lg xl:backdrop-blur")}>
-      {children}
-    </header>
+    <header className={cn(className, scrolled && "xl:bg-ink/90 xl:shadow-lg xl:backdrop-blur")}>{children}</header>
   );
 }
