@@ -17,6 +17,7 @@ export function Hero() {
         fill
         sizes="100vw"
         placeholder="blur"
+        quality={90}
         className="-z-20 object-cover object-[58%_center]"
       />
       <div aria-hidden="true" className="from-ink/85 via-ink/65 to-ink/30 absolute inset-0 -z-10 bg-gradient-to-r" />
@@ -35,7 +36,7 @@ export function Hero() {
 
           <h1 id="hero-titulo" className="mt-8">
             <span className="sr-only">ELEVE+ — Chegou a hora de decolar!</span>
-            <Image src={SITE_IMAGES.eleveLogo} alt="" priority className="h-auto w-full max-w-md" />
+            <Image src={SITE_IMAGES.eleveLogo} alt="" priority quality={90} className="h-auto w-full max-w-md" />
           </h1>
 
           <p aria-hidden="true" className="font-display mt-6 text-2xl uppercase md:text-4xl">

@@ -54,7 +54,7 @@ export default function Home() {
         </Section>
       </main>
       <SiteFooter />
-      {PROGRAM_VIDEO && <FloatingVideo src={PROGRAM_VIDEO.src} poster={PROGRAM_VIDEO.poster} />}
+      {PROGRAM_VIDEO && <FloatingVideo {...PROGRAM_VIDEO} />}
     </>
   );
 }
