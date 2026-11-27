@@ -1,105 +1,246 @@
-import { Section } from "./section";
+import Image from "next/image";
+import {
+  ArrowRight,
+  BookOpen,
+  Clock,
+  Compass,
+  Factory,
+  GraduationCap,
+  MapPin,
+  MessagesSquare,
+  MonitorCheck,
+  Plane,
+  Repeat,
+  Rocket,
+  Send,
+  Star,
+} from "lucide-react";
 import { MACRO_AREAS } from "@/lib/validation/application";
+import { SITE_IMAGES } from "@/lib/site-assets";
+import { BenefitsCarousel } from "./benefits-carousel";
+import { DashedCurves } from "./dashed-curves";
+import { Section, SectionHeading } from "./section";
 
-// Conteúdo das 5 seções (decisão de 26/11/2026). Textos tirados do escopo do programa e do MVP;
-// números e benefícios ainda passam pela confirmação final do RH antes da publicação.
+// Textos de 01 e 02 vêm do MVP; requisitos, trilha e etapas são os definidos pelo RH (26/11/2026).
 
-const STATS = [
-  { value: "1996", label: "ano em que tudo começou" },
-  { value: "30 mil m²", label: "de parque fabril em Aparecida de Goiânia" },
-  { value: "5 mil", label: "pontos de venda pelo Brasil" },
-  { value: "4 mil", label: "empregos diretos e indiretos" },
+export function ProgramaSection() {
+  return (
+    <Section id="programa">
+      <div className="grid items-center gap-16 lg:grid-cols-2">
+        <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+          <div aria-hidden="true" className="border-brand absolute -top-4 -left-4 h-full w-full rounded-3xl border-2" />
+          <Image
+            src={SITE_IMAGES.office}
+            alt="Estagiária e mentora analisando amostras de jeans"
+            placeholder="blur"
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            className="shadow-card relative aspect-[4/5] w-full rounded-3xl object-cover"
+          />
+        </div>
+        <div>
+          <SectionHeading id="programa" number="01" eyebrow="Sobre o ELEVE+" title="Seu futuro começa aqui." />
+          <div className="text-muted-foreground mt-8 flex flex-col gap-5 text-lg leading-relaxed">
+            <p>
+              O ELEVE+ é o Programa de Estágio do Grupo Sallo, criado para conectar novos talentos a experiências reais
+              de aprendizado, inovação e desenvolvimento profissional.
+            </p>
+            <p>
+              Acreditamos na força de novas ideias e no potencial de quem deseja crescer, aprender e transformar o
+              futuro.
+            </p>
+            <p>
+              Aqui, você terá a oportunidade de conhecer de perto o funcionamento de uma grande indústria, desenvolver
+              competências e construir sua trajetória profissional. São 12 meses, com início em fevereiro de 2027 e
+              mentoria mensal da liderança.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+export function SalloSection() {
+  return (
+    <Section id="sallo" tone="ink-gradient">
+      <DashedCurves flip className="top-10 -left-10 h-[50%] w-[45%] opacity-60" />
+      <div className="grid items-center gap-16 lg:grid-cols-2">
+        <div className="lg:order-2">
+          <SectionHeading
+            id="sallo"
+            number="02"
+            eyebrow="Sobre a Sallo"
+            title="Uma história de evolução. Um futuro de oportunidades."
+            dark
+          />
+          <div className="text-ink-muted mt-8 flex flex-col gap-5 leading-relaxed">
+            <p>
+              Há mais de 30 anos, o Grupo Sallo constrói uma trajetória de crescimento e inovação. Somos a maior
+              confecção do Centro-Oeste, presentes em todo o Brasil, com mais de 5 mil pontos de venda, um parque
+              industrial de 30 mil m², mais de 1.000 colaboradores diretos e 3.000 indiretos.
+            </p>
+            <p>
+              Nosso ecossistema é formado pelo Grupo Sallo, Sallo Jeans, Sallo Junior, Balada Jeans, Sallo Têxtil e
+              Somos Sallo, conectando moda, tecnologia e desenvolvimento humano.
+            </p>
+            <p>
+              Por meio do Projeto Heliponto, promovemos a ressocialização de reeducandos do Módulo de Respeito,
+              oferecendo capacitação profissional, trabalho digno e emprego garantido em nossa fábrica após o
+              cumprimento da pena.
+            </p>
+            <p>
+              Investimos continuamente em inovação, tecnologia e pessoas. Agora, queremos conectar a força da nossa
+              história à criatividade e ao potencial de uma nova geração de talentos.
+            </p>
+            <p className="border-brand text-ink-foreground border-l-2 pl-5 font-semibold">
+              Construímos uma grande história. Agora, queremos construir o futuro com você.
+            </p>
+          </div>
+          <Image src={SITE_IMAGES.salloLogo} alt="Grupo Sallo" className="mt-10 h-14 w-auto" />
+        </div>
+        <div className="mx-auto w-full max-w-md lg:order-1 lg:max-w-none">
+          <Image
+            src={SITE_IMAGES.factory}
+            alt="Estrutura industrial do Grupo Sallo"
+            placeholder="blur"
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            className="aspect-[4/5] w-full rounded-3xl object-cover shadow-2xl"
+          />
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+const REQUIREMENTS = [
+  {
+    icon: GraduationCap,
+    title: "Escolaridade e cursos",
+    text: "Graduação em Administração, Engenharia de Produção, Engenharias em geral, Economia, Ciências Contábeis, Design de Moda, Publicidade, Marketing, Psicologia, Sistemas de Informação, Ciência da Computação ou Estatística, ou áreas afins.",
+  },
+  { icon: BookOpen, title: "Semestres elegíveis", text: "Formatura prevista a partir de dezembro de 2027." },
+  {
+    icon: Clock,
+    title: "Disponibilidade de horário",
+    text: "6 horas por dia (30 por semana), em turno fixo de manhã ou de tarde, compatível com as suas aulas.",
+  },
+  {
+    icon: MapPin,
+    title: "Localidade",
+    text: "Estágio presencial na sede do Grupo Sallo, no Polo Empresarial Goiás, em Aparecida de Goiânia.",
+  },
+  {
+    icon: Star,
+    title: "Diferenciais",
+    text: "Não exigimos inglês nem experiência. Valorizamos iniciativa, vontade de aprender e afinidade com a nossa cultura.",
+  },
 ] as const;
 
-const BRANDS = ["Sallo Jeans", "Sallo Junior", "Balada Jeans", "Sallo Têxtil", "Somos Sallo"] as const;
-
-export function GrupoSalloSection() {
+export function RequisitosSection() {
   return (
-    <Section
-      id="grupo-sallo"
-      number="01"
-      eyebrow="O Grupo Sallo"
-      title="Uma história de evolução que começou num quintal"
-    >
-      <div className="grid gap-8 lg:grid-cols-[3fr_2fr]">
-        <div className="text-muted-foreground flex flex-col gap-4 text-base leading-relaxed sm:text-lg">
-          <p>
-            A Sallo nasceu em 1996, no quintal de casa, produzindo 200 peças por mês. Hoje é uma das maiores confecções
-            do país, com uma fábrica completa no Polo Empresarial Goiás, onde uma peça nasce no estilo, é cortada,
-            costurada, lavada e sai pronta para o cliente.
-          </p>
-          <p>
-            Agora a segunda geração assume a gestão. O ELEVE+ é o próximo capítulo dessa história: a nova liderança
-            escolhendo, pessoalmente, quem vai construir a Sallo junto com ela.
-          </p>
-          <ul className="flex flex-wrap gap-2 pt-2" aria-label="Marcas do grupo">
-            {BRANDS.map((b) => (
-              <li key={b} className="bg-secondary text-secondary-foreground rounded-full px-3 py-1 text-sm font-medium">
-                {b}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <dl className="grid grid-cols-2 gap-4">
-          {STATS.map((s) => (
-            <div key={s.label} className="bg-card shadow-card flex flex-col gap-1 rounded-lg p-4">
-              <dt className="text-muted-foreground order-2 text-sm">{s.label}</dt>
-              <dd className="font-display text-primary order-1 text-xl sm:text-2xl">{s.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
+    <Section id="requisitos">
+      <SectionHeading
+        id="requisitos"
+        number="03"
+        eyebrow="Requisitos"
+        title="O que você precisa para decolar?"
+        lead="Confira os critérios para participar do ELEVE+."
+      />
+      <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {REQUIREMENTS.map(({ icon: Icon, title, text }) => (
+          <li
+            key={title}
+            className="group bg-card hover:border-brand hover:shadow-card flex flex-col rounded-2xl border p-7 transition-all duration-300 hover:-translate-y-1"
+          >
+            <span className="bg-primary text-primary-foreground group-hover:bg-brand inline-flex size-12 items-center justify-center rounded-xl transition-colors">
+              <Icon aria-hidden="true" className="size-6" />
+            </span>
+            <h3 className="font-display text-primary mt-6 text-sm leading-snug">{title}</h3>
+            <p className="text-muted-foreground mt-3 text-sm leading-relaxed">{text}</p>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  );
+}
+
+export function BeneficiosSection() {
+  return (
+    <Section id="beneficios" tone="muted">
+      <SectionHeading
+        id="beneficios"
+        number="04"
+        eyebrow="Benefícios"
+        title="Benefícios para acompanhar sua jornada."
+        lead="Confira os benefícios oferecidos pelo Programa ELEVE+."
+      />
+      <BenefitsCarousel />
     </Section>
   );
 }
 
 const JOURNEY = [
   {
+    icon: Compass,
     when: "Mês 1",
     title: "Imersão",
     text: "Quatro semanas percorrendo a cadeia inteira, do estilo à expedição, acompanhando uma peça real do croqui até a prateleira.",
   },
   {
+    icon: Repeat,
     when: "Meses 2 a 7",
     title: "Job rotation",
     text: "Três rotações de dois meses em macroáreas diferentes, com tarefas reais e um mini-projeto em cada uma.",
   },
   {
+    icon: Rocket,
     when: "Meses 8 a 12",
     title: "Área de destino e Projeto Legado",
     text: "Você se fixa numa área e lidera um projeto com meta, patrocinador e apresentação final para a diretoria.",
   },
 ] as const;
 
-export function ProgramaSection() {
+export function TrilhaSection() {
   return (
-    <Section id="programa" number="02" eyebrow="O Programa" title="Seu futuro começa aqui" dark>
-      <div className="text-ink-muted flex max-w-3xl flex-col gap-4 text-base leading-relaxed sm:text-lg">
-        <p>
-          O ELEVE+ é o programa de estágio do Grupo Sallo para formar a próxima geração de gestores. São 12 meses, com
-          início em fevereiro de 2027, aprendendo na prática, perto de quem decide e com mentoria mensal da liderança.
-        </p>
-      </div>
+    <Section id="trilha" tone="ink">
+      <SectionHeading
+        id="trilha"
+        number="05"
+        eyebrow="Trilha de Desenvolvimento"
+        title="Sua jornada de desenvolvimento começa aqui."
+        lead="Um caminho pensado para você evoluir a cada etapa."
+        dark
+        center
+      />
 
-      <ol className="grid gap-4 md:grid-cols-3">
-        {JOURNEY.map((j, i) => (
-          <li key={j.title} className="bg-ink-card border-ink-border flex flex-col gap-2 rounded-lg border p-5">
-            <span className="text-orange text-sm font-semibold">
-              {i + 1}. {j.when}
+      <ol className="relative mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
+        <span
+          aria-hidden="true"
+          className="border-brand/50 absolute top-0 bottom-0 left-8 border-l-2 border-dashed md:top-8 md:right-[16%] md:bottom-auto md:left-[16%] md:border-t-2 md:border-l-0"
+        />
+        {JOURNEY.map(({ icon: Icon, when, title, text }, i) => (
+          <li key={title} className="relative flex gap-6 md:flex-col md:items-center md:text-center">
+            <span className="bg-brand text-brand-foreground border-ink shadow-glow relative inline-flex size-16 shrink-0 items-center justify-center rounded-full border-4">
+              <Icon aria-hidden="true" className="size-6" />
             </span>
-            <h3 className="text-lg font-semibold">{j.title}</h3>
-            <p className="text-ink-muted text-sm leading-relaxed">{j.text}</p>
+            <div className="md:mt-6">
+              <p className="text-brand text-xs font-semibold tracking-[0.25em] uppercase">
+                Etapa {String(i + 1).padStart(2, "0")} · {when}
+              </p>
+              <h3 className="font-display mt-3 text-lg">{title}</h3>
+              <p className="text-ink-muted mt-3 text-sm leading-relaxed md:mx-auto md:max-w-xs">{text}</p>
+            </div>
           </li>
         ))}
       </ol>
 
-      <div className="flex flex-col gap-4">
-        <h3 className="text-lg font-semibold">As 4 macroáreas</h3>
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-20">
+        <h3 className="font-display text-center text-sm tracking-[0.2em] uppercase">As 4 macroáreas do job rotation</h3>
+        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {MACRO_AREAS.map((a) => (
-            <li key={a.value} className="border-ink-border rounded-lg border p-4">
+            <li key={a.value} className="bg-ink-card border-ink-border rounded-2xl border p-6">
               <p className="font-semibold">{a.label}</p>
-              <p className="text-ink-muted mt-1 text-sm">{a.areas}</p>
+              <p className="text-ink-muted mt-2 text-sm leading-relaxed">{a.areas}</p>
             </li>
           ))}
         </ul>
@@ -108,98 +249,71 @@ export function ProgramaSection() {
   );
 }
 
-const REQUIREMENTS = [
-  {
-    title: "Escolaridade e cursos",
-    text: "Graduação em Administração, Engenharia de Produção, Engenharias em geral, Economia, Ciências Contábeis, Design de Moda, Publicidade, Marketing, Psicologia, Sistemas de Informação, Ciência da Computação ou Estatística, ou áreas afins.",
-  },
-  { title: "Semestres elegíveis", text: "Formatura prevista a partir de dezembro de 2027." },
-  {
-    title: "Disponibilidade de horário",
-    text: "6 horas por dia (30 por semana), em turno fixo de manhã ou de tarde, compatível com as suas aulas.",
-  },
-  {
-    title: "Localidade",
-    text: "Estágio presencial na sede do Grupo Sallo, no Polo Empresarial Goiás, em Aparecida de Goiânia.",
-  },
-  {
-    title: "Diferenciais",
-    text: "Não exigimos inglês nem experiência. Valorizamos iniciativa, vontade de aprender e afinidade com a nossa cultura.",
-  },
-] as const;
-
-export function PreRequisitosSection() {
-  return (
-    <Section id="pre-requisitos" number="03" eyebrow="Pré-requisitos" title="O que você precisa para decolar?">
-      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {REQUIREMENTS.map((r) => (
-          <li key={r.title} className="bg-card shadow-card flex flex-col gap-2 rounded-lg p-5">
-            <h3 className="text-primary font-semibold">{r.title}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">{r.text}</p>
-          </li>
-        ))}
-      </ul>
-    </Section>
-  );
-}
-
-// Lista do MVP (decisão de 26/11/2026).
-const BENEFITS = [
-  "Bolsa compatível com o mercado",
-  "Plano de saúde",
-  "Plano odontológico",
-  "Refeição na empresa",
-  "Vale-transporte ou combustível",
-  "Day off no aniversário",
-  "Desconto nos produtos do grupo",
-  "Mentoria mensal com diretores",
-  "Job rotation",
-  "Curso de inglês",
-] as const;
-
-export function BeneficiosSection() {
-  return (
-    <Section
-      id="beneficios"
-      number="04"
-      eyebrow="Benefícios"
-      title="O que você ganha com o ELEVE+"
-      className="bg-secondary/50"
-    >
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-        {BENEFITS.map((b) => (
-          <li key={b} className="bg-card shadow-card flex min-h-20 items-center rounded-lg p-4 text-sm font-medium">
-            {b}
-          </li>
-        ))}
-      </ul>
-    </Section>
-  );
-}
-
 const STEPS = [
-  { title: "Inscrição", text: "Formulário neste site, com currículo e um vídeo de até 1 minuto." },
-  { title: "Testes online", text: "Raciocínio lógico e numérico, interpretação de texto e perfil comportamental." },
-  { title: "Sallo Experience", text: "Uma manhã na fábrica, com tour, conversa com a liderança e um case em grupo." },
-  { title: "Painel com gestores", text: "Entrevista por competências com gestores de áreas diferentes." },
-  { title: "Entrevista final", text: "Conversa com a liderança e o RH. Você recebe retorno em todas as fases." },
+  { icon: Send, title: "Inscrição", text: "Formulário neste site, com currículo e um vídeo de até 1 minuto." },
+  {
+    icon: MonitorCheck,
+    title: "Testes online",
+    text: "Raciocínio lógico e numérico, interpretação de texto e perfil comportamental.",
+  },
+  {
+    icon: Factory,
+    title: "Sallo Experience",
+    text: "Uma manhã na fábrica, com tour, conversa com a liderança e um case em grupo.",
+  },
+  {
+    icon: MessagesSquare,
+    title: "Painel com gestores",
+    text: "Entrevista por competências com gestores de áreas diferentes.",
+  },
+  {
+    icon: Plane,
+    title: "Entrevista final",
+    text: "Conversa com a liderança e o RH. Você recebe retorno em todas as fases.",
+  },
 ] as const;
 
-export function EtapasSection() {
+export function ProcessoSection() {
   return (
-    <Section id="etapas" number="05" eyebrow="Etapas" title="Seu caminho até o ELEVE+">
-      <ol className="grid gap-4 md:grid-cols-5">
-        {STEPS.map((s, i) => (
-          <li key={s.title} className="bg-card shadow-card flex flex-col gap-2 rounded-lg p-5">
-            <span className="font-display text-orange text-2xl" aria-hidden="true">
-              {String(i + 1).padStart(2, "0")}
+    <Section id="processo">
+      <SectionHeading
+        id="processo"
+        number="06"
+        eyebrow="Processo Seletivo"
+        title="Seu caminho até o ELEVE+."
+        lead="As datas de cada fase são enviadas por e-mail aos inscritos."
+      />
+
+      <ol className="relative mt-16 grid gap-10 md:grid-cols-5 md:gap-6">
+        <span
+          aria-hidden="true"
+          className="bg-border absolute top-0 bottom-0 left-7 w-px md:top-7 md:right-[10%] md:bottom-auto md:left-[10%] md:h-px md:w-auto"
+        />
+        {STEPS.map(({ icon: Icon, title, text }, i) => (
+          <li key={title} className="relative flex gap-6 md:flex-col">
+            <span className="border-brand bg-background text-brand relative inline-flex size-14 shrink-0 items-center justify-center rounded-full border-2">
+              <Icon aria-hidden="true" className="size-5" />
             </span>
-            <h3 className="font-semibold">{s.title}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">{s.text}</p>
+            <div>
+              <span aria-hidden="true" className="font-display text-primary/15 block text-4xl md:mt-6">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="font-display text-primary mt-2 text-base">{title}</h3>
+              <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{text}</p>
+            </div>
           </li>
         ))}
       </ol>
-      <p className="text-muted-foreground text-sm">As datas de cada fase são enviadas por e-mail aos inscritos.</p>
+
+      <div className="mt-16 flex justify-center">
+        <a
+          href="#inscricao"
+          className="bg-primary text-primary-foreground inline-flex min-h-12 items-center gap-3 rounded-full px-8 py-4 text-sm font-bold tracking-wider uppercase transition-transform hover:-translate-y-0.5"
+        >
+          Inscreva-se agora
+          <ArrowRight aria-hidden="true" className="size-4" />
+        </a>
+      </div>
     </Section>
   );
 }

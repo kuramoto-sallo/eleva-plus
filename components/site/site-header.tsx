@@ -1,71 +1,90 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
+import { SITE_IMAGES } from "@/lib/site-assets";
+import { cn } from "@/lib/utils";
+import { HeaderScrollShell } from "./header-scroll-shell";
 
 export const NAV_LINKS = [
-  { href: "#grupo-sallo", label: "O Grupo Sallo" },
-  { href: "#programa", label: "O Programa" },
-  { href: "#pre-requisitos", label: "Pré-requisitos" },
-  { href: "#beneficios", label: "Benefícios" },
-  { href: "#etapas", label: "Etapas" },
+  { href: "/#programa", label: "O Programa" },
+  { href: "/#sallo", label: "Sobre a Sallo" },
+  { href: "/#beneficios", label: "Benefícios" },
+  { href: "/#trilha", label: "Trilha de Desenvolvimento" },
+  { href: "/#processo", label: "Processo Seletivo" },
 ] as const;
 
-/** Cabeçalho simples, sem ficar fixo na tela (nada flutuante cobrindo o formulário). */
-export function SiteHeader() {
+const CTA = "/#inscricao";
+
+/**
+ * Cabeçalho do site. Na página inicial fica transparente sobre o banner; no desktop acompanha a rolagem
+ * (ganha fundo escuro). No celular rola junto com a página, para nada ficar por cima do formulário.
+ */
+export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
   return (
-    <header className="bg-ink text-ink-foreground border-ink-border border-b">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
-        <Link href="/" className="font-display flex min-h-11 items-center text-lg tracking-wide">
-          ELEVE<span className="text-orange">+</span>
-          <span className="sr-only"> — Programa de Estágio Grupo Sallo, página inicial</span>
+    <HeaderScrollShell
+      className={cn(
+        "text-ink-foreground inset-x-0 top-0 z-50 transition-[background-color,padding,box-shadow] duration-300",
+        overlay ? "absolute py-5 xl:fixed" : "bg-ink relative py-4",
+      )}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 lg:px-8">
+        <Link href="/" className="flex min-h-11 items-center">
+          <Image src={SITE_IMAGES.eleveLogo} alt="ELEVE+, página inicial" priority className="h-8 w-auto md:h-10" />
         </Link>
 
-        <nav aria-label="Seções do site" className="hidden lg:block">
+        <nav aria-label="Seções do site" className="hidden xl:block">
           <ul className="flex items-center gap-1 text-sm">
             {NAV_LINKS.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="hover:text-orange flex min-h-11 items-center rounded-md px-3">
+                <a
+                  href={l.href}
+                  className="hover:text-brand flex min-h-11 items-center rounded-md px-3 transition-colors"
+                >
                   {l.label}
                 </a>
               </li>
             ))}
             <li>
               <a
-                href="#inscricao"
-                className="bg-brand text-brand-foreground ml-2 flex min-h-11 items-center rounded-md px-4 font-semibold"
+                href={CTA}
+                className="bg-brand-strong text-brand-foreground shadow-glow ml-3 flex min-h-11 items-center rounded-full px-6 text-xs font-bold tracking-wider uppercase transition-transform hover:-translate-y-0.5"
               >
-                Inscreva-se
+                Quero me inscrever
               </a>
             </li>
           </ul>
         </nav>
 
-        {/* Menu no celular: <details> funciona sem JavaScript e é acessível por teclado. */}
-        <details className="group relative lg:hidden">
-          <summary className="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center rounded-md [&::-webkit-details-marker]:hidden">
-            <Menu aria-hidden="true" className="size-6" />
+        {/* Menu abaixo de 1280 px: <details> funciona sem JavaScript e é acessível por teclado. */}
+        <details className="group relative xl:hidden">
+          <summary className="border-ink-border flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center rounded-full border bg-white/5 backdrop-blur [&::-webkit-details-marker]:hidden">
+            <Menu aria-hidden="true" className="size-5" />
             <span className="sr-only">Abrir menu</span>
           </summary>
           <nav
             aria-label="Seções do site"
-            className="bg-ink-card border-ink-border absolute right-0 z-10 mt-2 w-60 rounded-md border p-2 shadow-lg"
+            className="bg-ink-card border-ink-border absolute right-0 z-10 mt-3 w-72 rounded-2xl border p-3 shadow-lg"
           >
             <ul className="flex flex-col">
               {NAV_LINKS.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="flex min-h-11 items-center rounded px-3">
+                  <a href={l.href} className="hover:text-brand flex min-h-11 items-center rounded-lg px-3">
                     {l.label}
                   </a>
                 </li>
               ))}
-              <li>
-                <a href="#inscricao" className="text-orange flex min-h-11 items-center rounded px-3 font-semibold">
-                  Inscreva-se
+              <li className="mt-2">
+                <a
+                  href={CTA}
+                  className="bg-brand-strong text-brand-foreground flex min-h-11 items-center justify-center rounded-full px-4 text-xs font-bold tracking-wider uppercase"
+                >
+                  Quero me inscrever
                 </a>
               </li>
             </ul>
           </nav>
         </details>
       </div>
-    </header>
+    </HeaderScrollShell>
   );
 }

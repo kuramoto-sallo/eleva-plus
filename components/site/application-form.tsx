@@ -222,7 +222,7 @@ export function ApplicationForm({ turnstileSiteKey }: { turnstileSiteKey: string
 
   if (status === "sent") {
     return (
-      <div role="status" className="bg-card shadow-card flex flex-col gap-3 rounded-lg p-6 sm:p-8">
+      <div role="status" className="bg-card shadow-card flex flex-col gap-3 rounded-3xl p-6 md:p-10">
         <h3 className="font-display text-xl">Inscrição enviada!</h3>
         <p className="text-muted-foreground">
           Você vai receber uma confirmação por e-mail. Acompanhe sua caixa de entrada (e o spam) para as próximas
@@ -237,7 +237,7 @@ export function ApplicationForm({ turnstileSiteKey }: { turnstileSiteKey: string
 
   return (
     <form noValidate onSubmit={isLast ? handleFinalSubmit : (e) => (e.preventDefault(), void next())}>
-      <div className="bg-card shadow-card flex flex-col gap-6 rounded-lg p-5 sm:p-8">
+      <div className="bg-card shadow-card flex flex-col gap-6 rounded-3xl p-6 md:p-10">
         <div className="flex flex-col gap-3">
           <p className="text-muted-foreground text-sm" aria-live="polite">
             Etapa {step + 1} de {STEPS.length}
@@ -255,7 +255,12 @@ export function ApplicationForm({ turnstileSiteKey }: { turnstileSiteKey: string
               style={{ width: `${((step + 1) / STEPS.length) * 100}%` }}
             />
           </div>
-          <h3 ref={stepHeadingRef} tabIndex={-1} className="text-xl font-semibold outline-none">
+          <h3
+            ref={stepHeadingRef}
+            tabIndex={-1}
+            className="text-brand-strong flex items-center gap-3 text-xs font-bold tracking-[0.2em] uppercase outline-none"
+          >
+            <span aria-hidden="true" className="bg-brand h-px w-6" />
             {STEPS[step].title}
           </h3>
           <p className="text-muted-foreground text-sm">

@@ -2,15 +2,17 @@ import { expect, test } from "@playwright/test";
 
 // Dados fictícios (CLAUDE.md, LGPD).
 
-test("as 5 seções aparecem na ordem decidida", async ({ page }) => {
+test("as seções aparecem na ordem do MVP", async ({ page }) => {
   await page.goto("/");
   const titles = await page.locator("main section h2").allTextContents();
-  expect(titles.slice(0, 5)).toEqual([
-    "Uma história de evolução que começou num quintal",
-    "Seu futuro começa aqui",
+  expect(titles).toEqual([
+    "Seu futuro começa aqui.",
+    "Uma história de evolução. Um futuro de oportunidades.",
     "O que você precisa para decolar?",
-    "O que você ganha com o ELEVE+",
-    "Seu caminho até o ELEVE+",
+    "Benefícios para acompanhar sua jornada.",
+    "Sua jornada de desenvolvimento começa aqui.",
+    "Seu caminho até o ELEVE+.",
+    "Pronto para decolar?",
   ]);
 });
 
