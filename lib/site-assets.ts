@@ -14,10 +14,12 @@ export const SITE_IMAGES = {
 } as const;
 
 /**
- * Vídeo de apresentação do programa (em public/video/), reduzido para 540 px de largura (~4,5 MB).
+ * Vídeo de apresentação do programa (em public/video/). A prévia (360 px, sem áudio, ~2 MB) roda em loop na
+ * miniatura; o vídeo completo (720 px, com áudio, ~10 MB) só é baixado quando a pessoa abre.
  * Use `null` para esconder o player flutuante.
  */
-export const PROGRAM_VIDEO: { src: string; poster?: string } | null = {
+export const PROGRAM_VIDEO: { previewSrc: string; src: string; poster?: string } | null = {
+  previewSrc: "/video/estagio-eleve-previa.mp4",
   src: "/video/estagio-eleve.mp4",
   poster: "/video/estagio-eleve-capa.jpg",
 };

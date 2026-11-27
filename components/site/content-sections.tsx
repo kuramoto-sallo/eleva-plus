@@ -23,6 +23,8 @@ import { Section, SectionHeading } from "./section";
 
 // Textos de 01 e 02 vêm do MVP; requisitos, trilha e etapas são os definidos pelo RH (26/11/2026).
 
+// As fotos são horizontais e aparecem cortadas na vertical (4:5): o `sizes` pede uma versão mais larga que a
+// coluna para a foto não ficar esticada (e borrada) depois do corte.
 export function ProgramaSection() {
   return (
     <Section id="programa">
@@ -33,7 +35,8 @@ export function ProgramaSection() {
             src={SITE_IMAGES.office}
             alt="Equipe trabalhando no escritório do Grupo Sallo"
             placeholder="blur"
-            sizes="(min-width: 1024px) 40vw, 90vw"
+            quality={90}
+            sizes="(min-width: 1024px) 90vw, 200vw"
             className="shadow-card relative aspect-[4/5] w-full rounded-3xl object-cover"
           />
         </div>
@@ -103,7 +106,8 @@ export function SalloSection() {
             src={SITE_IMAGES.factory}
             alt="Vista aérea da fábrica do Grupo Sallo, em Aparecida de Goiânia"
             placeholder="blur"
-            sizes="(min-width: 1024px) 40vw, 90vw"
+            quality={90}
+            sizes="(min-width: 1024px) 90vw, 200vw"
             className="aspect-[4/5] w-full rounded-3xl object-cover shadow-2xl"
           />
         </div>

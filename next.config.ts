@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  images: {
+    // 90 para as fotos do site (nitidez); 75 é o padrão do Next.
+    qualities: [75, 90],
+    formats: ["image/avif", "image/webp"],
+  },
   turbopack: {
     rules: {
       "*.css": {
