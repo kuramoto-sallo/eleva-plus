@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 import { SITE_IMAGES } from "@/lib/site-assets";
 import { cn } from "@/lib/utils";
+import { CtaButton } from "./cta-button";
 import { HeaderScrollShell } from "./header-scroll-shell";
 
 export const NAV_LINKS = [
@@ -45,12 +46,9 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
               </li>
             ))}
             <li>
-              <a
-                href={CTA}
-                className="bg-brand-strong text-brand-foreground shadow-glow ml-3 flex min-h-11 items-center rounded-full px-6 text-xs font-bold tracking-wider uppercase transition-transform hover:-translate-y-0.5"
-              >
+              <CtaButton href={CTA} size="compact" className="shadow-glow ml-3">
                 Quero me inscrever
-              </a>
+              </CtaButton>
             </li>
           </ul>
         </nav>
@@ -74,12 +72,9 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
                 </li>
               ))}
               <li className="mt-2">
-                <a
-                  href={CTA}
-                  className="bg-brand-strong text-brand-foreground flex min-h-11 items-center justify-center rounded-full px-4 text-xs font-bold tracking-wider uppercase"
-                >
+                <CtaButton href={CTA} size="compact">
                   Quero me inscrever
-                </a>
+                </CtaButton>
               </li>
             </ul>
           </nav>

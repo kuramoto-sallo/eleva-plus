@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { SITE_IMAGES } from "@/lib/site-assets";
+import { CtaButton } from "./cta-button";
 import { DashedCurves } from "./dashed-curves";
 
 export function Hero() {
@@ -47,13 +47,7 @@ export function Hero() {
             trajetória profissional com o Grupo Sallo.
           </p>
 
-          <a
-            href="#inscricao"
-            className="bg-brand-strong text-brand-foreground shadow-glow mt-10 inline-flex min-h-12 items-center gap-3 rounded-full px-8 py-4 text-sm font-bold tracking-wider uppercase transition-transform hover:-translate-y-0.5"
-          >
-            Quero fazer parte
-            <ArrowRight aria-hidden="true" className="size-4" />
-          </a>
+          <CtaButton className="shadow-glow mt-10">Quero fazer parte</CtaButton>
         </div>
       </div>
     </section>
