@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const DPO_EMAIL = "dileusa.lima@sallo.com.br";
 
-// Pendente de confirmação do jurídico: o rascunho deixou estes dois trechos em aberto.
+// Confirmados pelo jurídico em 27/11/2026: cláusulas-padrão da ANPD; sem consentimento de responsável.
 const TRANSFER_TEXT =
   "Vercel, Resend e Cloudflare ficam fora do Brasil. Isso é uma transferência internacional de dados (LGPD, art. 33), " +
   "feita com as cláusulas-padrão contratuais aprovadas pela ANPD. Não compartilhamos seus dados com outras empresas, " +

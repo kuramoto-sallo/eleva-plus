@@ -17,8 +17,13 @@ export function SiteFooter() {
             </a>
           </li>
           <li>
-            <a href="tel:+556232401700" className="hover:text-ink-foreground inline-flex min-h-11 items-center">
-              (62) 3240-1700
+            <a
+              href="https://wa.me/5562983353435"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-ink-foreground inline-flex min-h-11 items-center"
+            >
+              WhatsApp (62) 98335-3435
             </a>
           </li>
           <li>
