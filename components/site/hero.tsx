@@ -29,14 +29,12 @@ export function Hero() {
 
       <div className="mx-auto w-full max-w-7xl px-5 pt-32 pb-20 lg:px-8">
         <div className="flex max-w-2xl flex-col items-start">
-          <p className="border-ink-border inline-flex items-center gap-2 rounded-full border bg-white/5 px-4 py-2 text-[0.7rem] font-semibold tracking-[0.15em] uppercase backdrop-blur sm:text-xs sm:tracking-[0.2em]">
-            <span aria-hidden="true" className="bg-brand size-2 rounded-full" />
-            Programa de Estágio Grupo Sallo
-          </p>
-
-          <h1 id="hero-titulo" className="mt-8">
+          <h1 id="hero-titulo">
             <span className="sr-only">ELEVE+ — Chegou a hora de decolar!</span>
-            <Image src={SITE_IMAGES.eleveLogo} alt="" priority quality={90} className="h-auto w-full max-w-md" />
+            {/* No desktop, a logo animada (MorphingLogo) assume este lugar e encolhe até o cabeçalho na rolagem. */}
+            <span id="logo-slot-hero" className="block w-full max-w-md">
+              <Image src={SITE_IMAGES.eleveLogo} alt="" priority quality={90} className="h-auto w-full" />
+            </span>
           </h1>
 
           <p aria-hidden="true" className="font-display mt-6 text-2xl uppercase md:text-4xl">

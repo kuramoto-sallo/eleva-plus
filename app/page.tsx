@@ -9,6 +9,7 @@ import {
 } from "@/components/site/content-sections";
 import { FloatingVideo } from "@/components/site/floating-video";
 import { Hero } from "@/components/site/hero";
+import { MorphingLogo } from "@/components/site/morphing-logo";
 import { Section, SectionHeading } from "@/components/site/section";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
@@ -25,6 +26,7 @@ export default function Home() {
         Pular para o conteúdo
       </a>
       <SiteHeader overlay />
+      <MorphingLogo />
       <main id="conteudo" className="flex flex-1 flex-col">
         <Hero />
         <ProgramaSection />

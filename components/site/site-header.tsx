@@ -29,9 +29,20 @@ export function SiteHeader({ overlay = false }: { overlay?: boolean }) {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 lg:px-8">
-        <Link href="/" className="flex min-h-11 items-center">
-          <Image src={SITE_IMAGES.eleveLogo} alt="ELEVE+, página inicial" priority className="h-8 w-auto md:h-10" />
-        </Link>
+        {overlay ? (
+          // Página inicial: a logo aparece no banner. No desktop ela "voa" até este espaço na rolagem
+          // (MorphingLogo); abaixo de 1280 px fica só no banner. O link continua aqui para quem navega por teclado.
+          <Link
+            href="/#topo"
+            id="logo-slot-header"
+            aria-label="ELEVE+, início da página"
+            className="flex h-10 w-[195px] items-center max-xl:invisible"
+          />
+        ) : (
+          <Link href="/" className="flex min-h-11 items-center">
+            <Image src={SITE_IMAGES.eleveLogo} alt="ELEVE+, página inicial" priority className="h-8 w-auto md:h-10" />
+          </Link>
+        )}
 
         <nav aria-label="Seções do site" className="hidden xl:block">
           <ul className="flex items-center gap-1 text-sm">

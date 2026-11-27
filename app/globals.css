@@ -150,3 +150,8 @@ html {
     animation: none;
   }
 }
+
+/* Logo que encolhe até o cabeçalho (components/site/morphing-logo.tsx): esconde a cópia estática do banner. */
+html[data-logo-morph] #logo-slot-hero > * {
+  visibility: hidden;
+}
