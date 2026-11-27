@@ -35,6 +35,8 @@
 
   --brand: var(--orange);
   --brand-foreground: oklch(99% 0 0);
+  /* Laranja um pouco mais escuro para texto em fundo claro e botões com texto branco (contraste AA). */
+  --brand-strong: oklch(54% 0.16 45);
 
   --ink: oklch(17% 0.05 275);
   --ink-card: oklch(22% 0.06 275);
@@ -69,6 +71,7 @@
   --color-ring: var(--ring);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
+  --color-brand-strong: var(--brand-strong);
   --color-navy: var(--navy);
   --color-orange: var(--orange);
   --color-ink: var(--ink);
@@ -95,5 +98,55 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
+  }
+}
+
+/* Rolagem suave até as seções, descontando o cabeçalho fixo do desktop. */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* Linhas tracejadas animadas do banner e da seção "Sobre a Sallo". */
+@keyframes dash {
+  to {
+    stroke-dashoffset: -160;
+  }
+}
+
+.animate-dash {
+  animation: dash 6s linear infinite;
+}
+
+/*
+ * Entrada suave das seções ao rolar, só com CSS (sem JavaScript): se o navegador não suportar
+ * animação ligada à rolagem, o conteúdo aparece normalmente.
+ */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-dash,
+  .reveal {
+    animation: none;
   }
 }
