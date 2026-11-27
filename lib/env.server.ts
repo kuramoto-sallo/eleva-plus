@@ -37,3 +37,9 @@ export function emailConfig() {
   if (isProduction()) throw new Error("RESEND_API_KEY ou EMAIL_FROM ausentes em produção");
   return null;
 }
+
+/** Segredo que a Vercel manda no cabeçalho Authorization dos cron jobs. Sem ele, o job não roda. */
+export function cronSecret() {
+  const secret = process.env.CRON_SECRET;
+  return secret && secret.length >= 16 ? secret : null;
+}

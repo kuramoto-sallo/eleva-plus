@@ -8,7 +8,8 @@ export type AuditAction =
   | "application.status_change"
   | "file.view"
   | "staff.invite"
-  | "staff.remove";
+  | "staff.remove"
+  | "process.update";
 
 /**
  * Grava no registro de auditoria. Só IDs, enums e contagens em details: nunca nome, e-mail

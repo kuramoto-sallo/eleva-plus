@@ -13,9 +13,14 @@ async function StaffNav() {
           Inscrições
         </Link>
         {staff.role === "admin" && (
-          <Link href="/admin/equipe" className="hover:bg-accent rounded-md px-3 py-2.5 font-medium">
-            Equipe
-          </Link>
+          <>
+            <Link href="/admin/processos" className="hover:bg-accent rounded-md px-3 py-2.5 font-medium">
+              Processos
+            </Link>
+            <Link href="/admin/equipe" className="hover:bg-accent rounded-md px-3 py-2.5 font-medium">
+              Equipe
+            </Link>
+          </>
         )}
       </nav>
       <div className="flex items-center gap-3 text-sm">
