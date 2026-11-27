@@ -9,8 +9,8 @@
  * fundo "ink" escuro nas seções de destaque.
  */
 :root {
-  --navy: oklch(24% 0.065 275);
-  --orange: oklch(62% 0.16 45);
+  --navy: #191e3d; /* manual da marca ELEVE+ */
+  --orange: #cb622d; /* manual da marca ELEVE+ */
 
   --background: oklch(98.5% 0.004 270);
   --foreground: oklch(20% 0.05 275);
