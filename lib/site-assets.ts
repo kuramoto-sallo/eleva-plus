@@ -14,7 +14,10 @@ export const SITE_IMAGES = {
 } as const;
 
 /**
- * Vídeo de apresentação do programa (em public/video/). `null` enquanto o arquivo não estiver no repositório:
- * o player flutuante só aparece quando houver vídeo.
+ * Vídeo de apresentação do programa (em public/video/), reduzido para 540 px de largura (~4,5 MB).
+ * Use `null` para esconder o player flutuante.
  */
-export const PROGRAM_VIDEO: { src: string; poster?: string } | null = null;
+export const PROGRAM_VIDEO: { src: string; poster?: string } | null = {
+  src: "/video/estagio-eleve.mp4",
+  poster: "/video/estagio-eleve-capa.jpg",
+};

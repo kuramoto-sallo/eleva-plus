@@ -8,7 +8,7 @@ type Props = { src: string; poster?: string };
 
 /**
  * Vídeo flutuante do programa. Só aparece a partir de 1024 px e some quando a seção de inscrição entra na
- * tela, para não cobrir o formulário. Começa pausado e mudo; tem botão de reproduzir/pausar e de fechar.
+ * tela, para não cobrir o formulário. Começa pausado; o som só toca quando a pessoa clica em reproduzir.
  */
 export function FloatingVideo({ src, poster }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -43,7 +43,7 @@ export function FloatingVideo({ src, poster }: Props) {
     <aside
       aria-label="Vídeo de apresentação do ELEVE+"
       className={cn(
-        "fixed bottom-5 left-4 z-40 hidden w-40 transition-opacity duration-300 lg:block xl:w-44",
+        "fixed right-4 bottom-5 z-40 hidden w-40 transition-opacity duration-300 lg:block xl:w-44",
         nearForm && "pointer-events-none opacity-0",
       )}
       aria-hidden={nearForm || undefined}
@@ -53,7 +53,6 @@ export function FloatingVideo({ src, poster }: Props) {
           ref={videoRef}
           src={src}
           poster={poster}
-          muted
           playsInline
           loop
           preload="metadata"

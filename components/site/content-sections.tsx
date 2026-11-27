@@ -31,7 +31,7 @@ export function ProgramaSection() {
           <div aria-hidden="true" className="border-brand absolute -top-4 -left-4 h-full w-full rounded-3xl border-2" />
           <Image
             src={SITE_IMAGES.office}
-            alt="Estagiária e mentora analisando amostras de jeans"
+            alt="Equipe trabalhando no escritório do Grupo Sallo"
             placeholder="blur"
             sizes="(min-width: 1024px) 40vw, 90vw"
             className="shadow-card relative aspect-[4/5] w-full rounded-3xl object-cover"
@@ -101,7 +101,7 @@ export function SalloSection() {
         <div className="mx-auto w-full max-w-md lg:order-1 lg:max-w-none">
           <Image
             src={SITE_IMAGES.factory}
-            alt="Estrutura industrial do Grupo Sallo"
+            alt="Vista aérea da fábrica do Grupo Sallo, em Aparecida de Goiânia"
             placeholder="blur"
             sizes="(min-width: 1024px) 40vw, 90vw"
             className="aspect-[4/5] w-full rounded-3xl object-cover shadow-2xl"
