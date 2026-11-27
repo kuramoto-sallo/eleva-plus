@@ -1,4 +1,5 @@
 import { ApplicationForm } from "@/components/site/application-form";
+import { turnstileSiteKey } from "@/lib/env";
 import {
   BeneficiosSection,
   EtapasSection,
@@ -40,7 +41,7 @@ export default function Home() {
             dele no YouTube).
           </p>
           <div className="max-w-3xl">
-            <ApplicationForm />
+            <ApplicationForm turnstileSiteKey={turnstileSiteKey()} />
           </div>
         </Section>
       </main>

@@ -59,7 +59,6 @@ test("percorre as 4 etapas e bloqueia formatura antes de dez/2027", async ({ pag
   await page.getByLabel("Link do vídeo no YouTube").fill("https://youtu.be/teste");
   await page.getByLabel(/16 anos ou mais/).check();
   await page.getByLabel(/Li e aceito/).check();
-  await page.getByRole("button", { name: "Enviar minha inscrição" }).click();
-  // O envio ao servidor entra no próximo PR; por enquanto o formulário avisa e não envia nada.
-  await expect(page.locator("form").getByRole("alert")).toContainText("não foram enviados");
+  // O envio real depende do Supabase e do Turnstile; aqui só conferimos que a última etapa está pronta.
+  await expect(page.getByRole("button", { name: "Enviar minha inscrição" })).toBeEnabled();
 });
