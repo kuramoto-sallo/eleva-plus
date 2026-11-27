@@ -1,15 +1,50 @@
-import { Button } from "@/components/ui/button";
+import { ApplicationForm } from "@/components/site/application-form";
+import {
+  BeneficiosSection,
+  EtapasSection,
+  GrupoSalloSection,
+  PreRequisitosSection,
+  ProgramaSection,
+} from "@/components/site/content-sections";
+import { Hero } from "@/components/site/hero";
+import { Section } from "@/components/site/section";
+import { SiteFooter } from "@/components/site/site-footer";
+import { SiteHeader } from "@/components/site/site-header";
 
-// Placeholder da Fase 0. A página inicial real (seções do MVP) entra na Fase 3.
 export default function Home() {
   return (
-    <main className="bg-ink text-ink-foreground flex flex-1 flex-col items-center justify-center gap-8 [background-image:var(--gradient-ink)] px-6 py-24 text-center">
-      <p className="text-orange text-sm font-semibold tracking-[0.2em] uppercase">Programa de Estágio Grupo Sallo</p>
-      <h1 className="font-display text-3xl leading-tight sm:text-5xl">ELEVE+ — Chegou a hora de decolar!</h1>
-      <p className="text-ink-muted max-w-xl">Seu talento pode ir mais longe. As inscrições abrem em breve.</p>
-      <Button variant="brand" size="lg" disabled>
-        Inscrições em breve
-      </Button>
-    </main>
+    <>
+      <a
+        href="#conteudo"
+        className="focus:bg-brand focus:text-brand-foreground sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:px-4 focus:py-3"
+      >
+        Pular para o conteúdo
+      </a>
+      <SiteHeader />
+      <main id="conteudo" className="flex flex-1 flex-col">
+        <Hero />
+        <GrupoSalloSection />
+        <ProgramaSection />
+        <PreRequisitosSection />
+        <BeneficiosSection />
+        <EtapasSection />
+        <Section
+          id="inscricao"
+          number="06"
+          eyebrow="Inscreva-se"
+          title="Pronto para decolar?"
+          className="bg-secondary/50"
+        >
+          <p className="text-muted-foreground max-w-2xl">
+            A inscrição tem 4 etapas e leva cerca de 10 minutos. Tenha à mão seu currículo em PDF e o vídeo (ou o link
+            dele no YouTube).
+          </p>
+          <div className="max-w-3xl">
+            <ApplicationForm />
+          </div>
+        </Section>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
